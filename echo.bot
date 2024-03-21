@@ -22,8 +22,8 @@ async def stop_echo(update: Update, context: CallbackContext) -> None:
 # Updated echo function with the check for "Ivar"
 async def echo(update: Update, context: CallbackContext) -> None:
     if update.message and update.message.from_user.id in echo_users:
-        # Check if 'Ivar' is mentioned in the message
-        if 'Ivar' in update.message.text:
+        # Convert the message text to lowercase and check if 'ivar' is mentioned
+        if 'ivar' in update.message.text.lower():
             # Send the custom response instead of echoing the message
             await context.bot.send_message(chat_id=update.message.chat_id, text="Ivar is dope")
         else:
