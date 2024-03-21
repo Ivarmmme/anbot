@@ -1,0 +1,29 @@
+{
+  "name": "TelegramBot",
+  "description": "A Telegram bot that echoes messages in groups.",
+  "repository": "https://github.com/yourusername/your-repo-name",
+  "logo": "http://your-logo-url.com/logo.svg",
+  "keywords": [
+    "node",
+    "telegram-bot",
+    "echo"
+  ],
+  "env": {
+    "TELEGRAM_BOT_TOKEN": {
+      "description": "The Telegram bot API token",
+      "required": true
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
