@@ -1,7 +1,7 @@
 {
   "name": "TelegramBot",
   "description": "A Telegram bot that echoes messages in groups.",
-  "repository": "https://github.com/yourusername/your-repo-name",
+  "repository": "https://github.com/Ivarmmme/anbot",
   "logo": "http://your-logo-url.com/logo.svg",
   "keywords": [
     "node",
