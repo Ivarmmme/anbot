@@ -4,7 +4,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, CallbackCo
 
 # Retrieve the bot token from an environment variable
 TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
-AUTHORIZED_USERS = [6369933143]  # Replace with actual user IDs
+AUTHORIZED_USERS = [6784200062]  # Replace with actual user IDs
 echo_users = set()
 
 async def start_echo(update: Update, context: CallbackContext) -> None:
@@ -19,9 +19,16 @@ async def stop_echo(update: Update, context: CallbackContext) -> None:
         echo_users.clear()  # Clear the set of users being echoed
         await update.message.reply_text("Stopped echoing messages.")
 
+# Updated echo function with the check for "Ivar"
 async def echo(update: Update, context: CallbackContext) -> None:
     if update.message and update.message.from_user.id in echo_users:
-        await context.bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
+        # Check if 'Ivar' is mentioned in the message
+        if 'Ivar' in update.message.text:
+            # Send the custom response instead of echoing the message
+            await context.bot.send_message(chat_id=update.message.chat_id, text="Ivar is dope")
+        else:
+            # Echo the original message
+            await context.bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
 
 def main() -> None:
     if TOKEN is None:
@@ -41,4 +48,3 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
-    
