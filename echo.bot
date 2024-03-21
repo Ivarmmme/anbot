@@ -4,7 +4,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, CallbackCo
 
 # Retrieve the bot token from an environment variable
 TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
-AUTHORIZED_USERS = [6784200062]  # Replace with actual user IDs
+AUTHORIZED_USERS = [6369933143]  # Replace with actual user IDs
 echo_users = set()
 
 async def start_echo(update: Update, context: CallbackContext) -> None:
