@@ -28,13 +28,14 @@ async def stop_echo(update: Update, context: CallbackContext) -> None:
 
 async def echo(update: Update, context: CallbackContext) -> None:
     if update.message and update.message.from_user.id in echo_users:
-        # Convert the message text to lowercase and check if 'ivar' is mentioned
+        # Check if 'ivar' is mentioned in the message text
         if 'ivar' in update.message.text.lower():
-            # Send the custom response instead of echoing the message
-            await context.bot.send_message(chat_id=update.message.chat_id, text="Ivar is dope")
+            # Send the custom response as a reply to the original message
+            await update.message.reply_text("Ivar is dope")
         else:
-            # Echo the original message
-            await context.bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
+            # Echo the original message as a reply
+            await update.message.reply_text(update.message.text)
+
 
 def main() -> None:
     if TOKEN is None:
