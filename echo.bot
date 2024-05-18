@@ -5,40 +5,8 @@ from telegram.ext import Application, CommandHandler, MessageHandler, CallbackCo
 # Retrieve the bot token from an environment variable
 TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 AUTHORIZED_USERS = [6369933143]  # Replace with actual user IDs
-echo_users = set()
+
 gif_users = set()
-
-GIF_URL = 'https://graph.org/file/6805acd7f5e08d1266dfa.mp4'  # Replace with your actual GIF URL
-
-async def start_echo(update: Update, context: CallbackContext) -> None:
-    # Check if the command is issued in reply to a message
-    if update.message.reply_to_message:
-        user_id = update.message.reply_to_message.from_user.id
-        echo_users.add(user_id)
-        await update.message.reply_text(f"Echoing messages from user {user_id}.")
-    else:
-        # Existing functionality to manually add a user by ID
-        args = update.message.text.split()
-        if len(args) >= 2 and update.message.from_user.id in AUTHORIZED_USERS:
-            user_id = int(args[1])
-            echo_users.add(user_id)
-            await update.message.reply_text(f"Echoing messages from user {user_id}.")
-
-async def stop_echo(update: Update, context: CallbackContext) -> None:
-    if update.message.from_user.id in AUTHORIZED_USERS:
-        echo_users.clear()  # Clear the set of users being echoed
-        gif_users.clear()   # Clear the set of users being replied with GIFs
-        await update.message.reply_text("Stopped echoing and GIF replying to messages.")
-
-async def echo(update: Update, context: CallbackContext) -> None:
-    if update.message and update.message.from_user.id in echo_users:
-        # Check if 'ivar' is mentioned in the message text
-        if 'ivar' in update.message.text.lower():
-            # Send the custom response as a reply to the original message
-            await update.message.reply_text("Ivar is dope")
-        else:
-            # Echo the original message as a reply
-            await update.message.reply_text(update.message.text)
 
 async def start_gif_reply(update: Update, context: CallbackContext) -> None:
     # Check if the command is issued in reply to a message
@@ -54,10 +22,17 @@ async def start_gif_reply(update: Update, context: CallbackContext) -> None:
             gif_users.add(user_id)
             await update.message.reply_text(f"Replying with GIFs to messages from user {user_id}.")
 
+GIF_URL = 'https://graph.org/file/6805acd7f5e08d1266dfa.mp4'  # Replace with your actual GIF URL
+
 async def gif_reply(update: Update, context: CallbackContext) -> None:
     if update.message and update.message.from_user.id in gif_users:
         # Reply with a GIF using the URL
         await update.message.reply_animation(animation=GIF_URL)
+
+async def stop_echo(update: Update, context: CallbackContext) -> None:
+    if update.message.from_user.id in AUTHORIZED_USERS:
+        gif_users.clear()   # Clear the set of users being replied with GIFs
+        await update.message.reply_text("Stopped echoing and GIF replying to messages.")
 
 def main() -> None:
     if TOKEN is None:
