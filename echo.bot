@@ -7,7 +7,8 @@ TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 AUTHORIZED_USERS = [6369933143]  # Replace with actual user IDs
 echo_users = set()
 gif_users = set()
-GIF_URL = 'https://graph.org/file/046bb529b1f065a4db29e.mp4'  # Replace with your actual GIF URL
+
+GIF_URL = 'https://graph.org/file/6805acd7f5e08d1266dfa.mp4'  # Replace with your actual GIF URL
 
 async def start_echo(update: Update, context: CallbackContext) -> None:
     # Check if the command is issued in reply to a message
@@ -56,7 +57,7 @@ async def start_gif_reply(update: Update, context: CallbackContext) -> None:
 async def gif_reply(update: Update, context: CallbackContext) -> None:
     if update.message and update.message.from_user.id in gif_users:
         # Reply with a GIF using the URL
-        await update.message.reply_animation(GIF_URL)
+        await update.message.reply_animation(animation=GIF_URL)
 
 def main() -> None:
     if TOKEN is None:
