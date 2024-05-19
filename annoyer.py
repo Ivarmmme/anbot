@@ -32,7 +32,7 @@ gif_users = set()
 async def stop_echo(update: Update, context: CallbackContext) -> None:
     if update.message.from_user.id in AUTHORIZED_USERS:
         gif_users.clear()# Clear the set of users being replied with GIFs
-        await update.message.reply_text("Mission accomplished .")
+        await update.message.reply_text("Mission accomplished, Niggesh is dead .")
 
 def main() -> None:
     if TOKEN is None:
@@ -44,7 +44,7 @@ def main() -> None:
     application.add_handler(CommandHandler('echo', start_echo, filters.ChatType.GROUPS))
     application.add_handler(CommandHandler('mathi', stop_echo, filters.ChatType.GROUPS))
     application.add_handler(CommandHandler('end', stop, filters.ChatType.GROUPS))
-    application.add_handler(CommandHandler('surah', start_gif_reply, filters.ChatType.GROUPS)))
+    application.add_handler(CommandHandler('surah', start_gif_reply, filters.ChatType.GROUPS))
 
     # Message handlers
     application.add_handler(MessageHandler(filters.TEXT & filters.ChatType.GROUPS, echo))
