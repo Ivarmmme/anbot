@@ -1,6 +1,5 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackContext, filters
-from annoyer import stop_echo
 
 AUTHORIZED_USERS = [6369933143]  # Replace with actual user IDs
 echo_users = set()
@@ -29,3 +28,7 @@ async def echo(update: Update, context: CallbackContext) -> None:
         else:
             # Echo the original message as a reply
             await update.message.reply_text(update.message.text)
+async def stop(update: Update, context: CallbackContext) -> None:
+    if update.message.from_user.id in AUTHORIZED_USERS:
+        echo_users.clear()  
+        await update.message.reply_text("Stopped echoing and GIF replying to messages.")
