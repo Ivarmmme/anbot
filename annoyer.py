@@ -32,7 +32,7 @@ async def gif_reply(update: Update, context: CallbackContext) -> None:
 async def stop_echo(update: Update, context: CallbackContext) -> None:
     if update.message.from_user.id in AUTHORIZED_USERS:
         gif_users.clear()# Clear the set of users being replied with GIFs
-        await update.message.reply_text("Stopped echoing and GIF replying to messages.")
+        await update.message.reply_text("Task Accepted **Kill Niggesh**.")
 
 def main() -> None:
     if TOKEN is None:
@@ -44,11 +44,12 @@ def main() -> None:
     application.add_handler(CommandHandler('echo', start_echo, filters.ChatType.GROUPS))
     application.add_handler(CommandHandler('mathi', stop_echo, filters.ChatType.GROUPS))
     application.add_handler(CommandHandler('end', stop, filters.ChatType.GROUPS))
-    application.add_handler(CommandHandler('gif', start_gif_reply, filters.ChatType.GROUPS))
+    application.add_handler(CommandHandler('surah', start_gif_reply))
 
     # Message handlers
     application.add_handler(MessageHandler(filters.TEXT & filters.ChatType.GROUPS, echo))
-    application.add_handler(MessageHandler(filters.TEXT & filters.ChatType.GROUPS, gif_reply))
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.REPLY, gif_reply))
+
     # Start the bot
     application.run_polling()
 
