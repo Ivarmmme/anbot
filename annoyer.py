@@ -32,7 +32,7 @@ async def gif_reply(update: Update, context: CallbackContext) -> None:
 async def stop_echo(update: Update, context: CallbackContext) -> None:
     if update.message.from_user.id in AUTHORIZED_USERS:
         gif_users.clear()# Clear the set of users being replied with GIFs
-        await update.message.reply_text("Task Accepted **Kill Niggesh**.")
+        await update.message.reply_text("Mission accomplished .")
 
 def main() -> None:
     if TOKEN is None:
