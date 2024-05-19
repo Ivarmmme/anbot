@@ -1,1 +1,1 @@
-worker: python3 echo.bot
+worker: python3 annoyer.py
