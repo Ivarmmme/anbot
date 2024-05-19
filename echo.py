@@ -31,4 +31,4 @@ async def echo(update: Update, context: CallbackContext) -> None:
 async def stop(update: Update, context: CallbackContext) -> None:
     if update.message.from_user.id in AUTHORIZED_USERS:
         echo_users.clear()  
-        await update.message.reply_text("Stopped echoing and GIF replying to messages.")
+        await update.message.reply_text("Stopped echoing.")
