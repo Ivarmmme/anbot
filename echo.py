@@ -1,6 +1,6 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackContext, filters
-
+from annoyer import stop_echo
 
 AUTHORIZED_USERS = [6369933143]  # Replace with actual user IDs
 echo_users = set()
