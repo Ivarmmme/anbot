@@ -1,7 +1,7 @@
 import os
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackContext, filters
-from echo import echo, start_echo
+from echo import echo, start_echo, stop
 # Retrieve the bot token from an environment variable
 TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 AUTHORIZED_USERS = [6369933143]  # Replace with actual user IDs
@@ -43,7 +43,8 @@ def main() -> None:
 
     # Command handler
     application.add_handler(CommandHandler('echo', start_echo, filters.ChatType.GROUPS))
-    application.add_handler(CommandHandler('end', stop_echo, filters.ChatType.GROUPS))
+    application.add_handler(CommandHandler('mathi', stop_echo, filters.ChatType.GROUPS))
+    application.add_handler(CommandHandler('end', stop, filters.ChatType.GROUPS))
     application.add_handler(CommandHandler('gif', start_gif_reply, filters.ChatType.GROUPS))
 
     # Message handlers
